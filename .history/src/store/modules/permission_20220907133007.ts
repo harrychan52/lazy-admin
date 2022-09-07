@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
+import type { Menu } from '/@/router/types';
 
 interface PermissionState {
   // 用户按钮权限列表
@@ -7,7 +8,7 @@ interface PermissionState {
     [propName: string]: any;
   };
   // 后台菜单列表
-  backMenuList: string[];
+  backMenuList: Menu[];
 }
 
 export const usePermissionStore = defineStore({
@@ -34,7 +35,7 @@ export const usePermissionStore = defineStore({
       this.authButtons = authButtonList;
     },
     // setAuthRouter
-    async setAuthRouter(dynamicRouter: string[]) {
+    async setAuthRouter(dynamicRouter: Menu[]) {
       this.backMenuList = dynamicRouter;
     },
   },

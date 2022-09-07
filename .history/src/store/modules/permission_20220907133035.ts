@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
+import type { Menu } from '/@/router/types';
 
 interface PermissionState {
   // 用户按钮权限列表

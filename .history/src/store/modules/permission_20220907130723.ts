@@ -1,13 +1,11 @@
 import { defineStore } from 'pinia';
-import { store } from '/@/store';
-
+import { AuthState } from '../interface';
+import piniaPersistConfig from '@/config/piniaPersist';
 interface PermissionState {
   // 用户按钮权限列表
-  authButtons: {
-    [propName: string]: any;
-  };
+  authButtons: {};
   // 后台菜单列表
-  backMenuList: string[];
+  backMenuList: Menu[];
 }
 
 export const usePermissionStore = defineStore({
@@ -16,7 +14,7 @@ export const usePermissionStore = defineStore({
     // 用户按钮权限列表
     authButtons: {},
     // 路由权限列表
-    backMenuList: [],
+    authRouter: [],
   }),
   getters: {
     // 处理权限按钮数据，用于方便控制按钮
@@ -25,7 +23,7 @@ export const usePermissionStore = defineStore({
     },
     // 后台返回的菜单数据，用于方便控制路由跳转时权限（这里已经处理成一维数组了）
     dynamicRouter: (state) => {
-      return state.backMenuList;
+      return state.authRouter;
     },
   },
   actions: {
@@ -35,10 +33,8 @@ export const usePermissionStore = defineStore({
     },
     // setAuthRouter
     async setAuthRouter(dynamicRouter: string[]) {
-      this.backMenuList = dynamicRouter;
+      this.authRouter = dynamicRouter;
     },
   },
+  persist: piniaPersistConfig('AuthState'),
 });
-export function usePermissionStoreWithOut() {
-  return usePermissionStore(store);
-}

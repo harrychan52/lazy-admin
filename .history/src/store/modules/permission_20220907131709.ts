@@ -1,13 +1,12 @@
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
+import type { Menu } from '/@/router/types';
 
 interface PermissionState {
   // 用户按钮权限列表
-  authButtons: {
-    [propName: string]: any;
-  };
+  authButtons: {};
   // 后台菜单列表
-  backMenuList: string[];
+  backMenuList: Menu[];
 }
 
 export const usePermissionStore = defineStore({
@@ -20,12 +19,12 @@ export const usePermissionStore = defineStore({
   }),
   getters: {
     // 处理权限按钮数据，用于方便控制按钮
-    authButtonsObj: (state) => {
-      return state.authButtons;
+    authButtonsObj() {
+      return this.authButtons;
     },
     // 后台返回的菜单数据，用于方便控制路由跳转时权限（这里已经处理成一维数组了）
-    dynamicRouter: (state) => {
-      return state.backMenuList;
+    dynamicRouter(): Menu[] {
+      return this.backMenuList;
     },
   },
   actions: {
@@ -34,7 +33,7 @@ export const usePermissionStore = defineStore({
       this.authButtons = authButtonList;
     },
     // setAuthRouter
-    async setAuthRouter(dynamicRouter: string[]) {
+    async setAuthRouter(dynamicRouter: Menu[]) {
       this.backMenuList = dynamicRouter;
     },
   },

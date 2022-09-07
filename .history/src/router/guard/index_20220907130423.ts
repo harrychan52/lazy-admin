@@ -1,9 +1,9 @@
 import type { Router, RouteRecordRaw } from 'vue-router';
 import { RootRoute } from '/@/router/routes';
 import { PageEnum } from '/@/enums/pageEnum';
-import { HOME_URL } from '/@/config/config';
+import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
 import { useUserStoreWithOut } from '/@/store/modules/user';
-import { usePermissionStore } from '/@/store/modules/permission';
+import { useUserStoreWithOut } from '/@/store/modules/permission';
 
 const LOGIN_PATH = PageEnum.BASE_LOGIN;
 
@@ -42,9 +42,9 @@ function createPermissionGuard(router: Router) {
      * 一般做法
      */
 
-    const permissionStore = usePermissionStore();
+    const permissionStore = permissionStore();
     // * Dynamic Router(动态路由，根据后端返回的菜单数据生成的一维数组)
-    const dynamicRouter = permissionStore.dynamicRouter;
+    const dynamicRouter = authStore.dynamicRouter;
     // * Static Router(静态路由，必须配置首页地址，否则不能进首页获取菜单、按钮权限等数据)，获取数据的时候会loading，所有配置首页地址也没问题
     const staticRouter = [HOME_URL, '/403'];
     const routerList = dynamicRouter.concat(staticRouter);

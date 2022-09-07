@@ -3,11 +3,9 @@ import { store } from '/@/store';
 
 interface PermissionState {
   // 用户按钮权限列表
-  authButtons: {
-    [propName: string]: any;
-  };
+  authButtons: {};
   // 后台菜单列表
-  backMenuList: string[];
+  backMenuList: [];
 }
 
 export const usePermissionStore = defineStore({

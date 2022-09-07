@@ -1,13 +1,11 @@
 import { defineStore } from 'pinia';
-import { store } from '/@/store';
-
+import { AuthState } from '../interface';
+import piniaPersistConfig from '@/config/piniaPersist';
 interface PermissionState {
   // 用户按钮权限列表
-  authButtons: {
-    [propName: string]: any;
-  };
+  authButtons: {};
   // 后台菜单列表
-  backMenuList: string[];
+  backMenuList: [];
 }
 
 export const usePermissionStore = defineStore({
@@ -39,6 +37,4 @@ export const usePermissionStore = defineStore({
     },
   },
 });
-export function usePermissionStoreWithOut() {
-  return usePermissionStore(store);
-}
+
