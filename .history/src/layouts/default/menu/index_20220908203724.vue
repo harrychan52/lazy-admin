@@ -1,0 +1,38 @@
+<template>
+  <div class="menu" v-loading="loading">
+    <Menu>
+      <SubMenuItem :menuList="menuList" />
+    </Menu>
+  </div>
+</template>
+
+<script setup lang="ts">
+  import { Menu } from 'ant-design-vue';
+  import SubMenuItem from './components/SubMenuItem.vue';
+  import { getMenuList } from '/@/api/modules/login';
+  import { useMenuStore } from '/@/store/modules/menu';
+  import { usePermissionStore } from '/@/store/modules/permission';
+  import { ref, computed, onMounted } from 'vue';
+  import { useRoute } from 'vue-router';
+  const MenuStore = useMenuStore();
+  const PermissionStore = usePermissionStore();
+  const loading = ref(false);
+  onMounted(async () => {
+    // 获取菜单列表
+    loading.value = true;
+    try {
+      const res = await getMenuList();
+      if (!res.data) return;
+      // 把路由菜单处理成一维数组（存储到 pinia 中）
+      const dynamicRouter = handleRouter(res.data);
+      PermissionStore.setAuthRouter(dynamicRouter);
+      MenuStore.setMenuList(res.data);
+    } finally {
+      loading.value = false;
+    }
+  });
+
+  const menuList = computed((): Menu.MenuOptions[] => PermissionStore.backMenuList);
+</script>
+
+<style scoped lang="less"></style>
