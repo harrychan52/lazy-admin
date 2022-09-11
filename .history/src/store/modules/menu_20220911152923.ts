@@ -25,7 +25,7 @@ export const useMenuStore = defineStore({
       this.menuList = menuList;
     },
   },
-  persist: piniaPersistConfig('MenuState'),
+  persist: piniaPersistConfig(MenuState),
 });
 export function useMenuStoreWithOut() {
   return useMenuStore(store);

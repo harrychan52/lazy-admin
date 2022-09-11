@@ -39,7 +39,6 @@ export const usePermissionStore = defineStore({
       this.backMenuList = dynamicRouter;
     },
   },
-  persist: piniaPersistConfig('PermissionState'),
 });
 export function usePermissionStoreWithOut() {
   return usePermissionStore(store);
