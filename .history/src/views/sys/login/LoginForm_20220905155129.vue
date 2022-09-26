@@ -1,0 +1,40 @@
+<template>
+  <Form :model="formData" ref="formRef" size="large">
+    <FormItem name="account">
+      <Input size="large" v-model:value="formData.account" placeholder="请输入账号" />
+    </FormItem>
+    <FormItem name="password">
+      <InputPassword size="large" v-model:value="formData.password" placeholder="请输入密码" />
+    </FormItem>
+  </Form>
+  <div class="login-btn">
+    <Button :icon="CircleClose" round @click="resetForm(loginFormRef)" size="large"
+      >重置</Button
+    >
+    <Button
+      :icon="UserFilled"
+      round
+      @click="login(loginFormRef)"
+      size="large"
+      type="primary"
+      :loading="loading"
+    >
+      登录
+    </Button>
+  </div>
+</template>
+<script lang="ts" setup>
+  import { reactive, ref, unref, computed } from 'vue';
+
+  import { Form, Input, Button } from 'ant-design-vue';
+
+  const formData = reactive({
+    account: 'lazy',
+    password: '123456',
+  });
+  const FormItem = Form.Item;
+  const InputPassword = Input.Password;
+</script>
+<style scoped lang="scss">
+  @import './index.scss';
+</style>

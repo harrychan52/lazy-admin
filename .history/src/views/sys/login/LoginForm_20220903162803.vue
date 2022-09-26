@@ -1,0 +1,19 @@
+<template>
+  <Form :model="formData" ref="formRef">
+    <FormItem name="account" class="enter-x">
+      <Input size="large" v-model:value="formData.account" placeholder="请输入账号" />
+    </FormItem>
+  </Form>
+</template>
+<script lang="ts" setup>
+  import { reactive, ref, unref, computed } from 'vue';
+
+  import { Form, Input, Button } from 'ant-design-vue';
+
+  const formData = reactive({
+    account: 'lazy',
+    password: '123456',
+  });
+  const FormItem = Form.Item;
+  const InputPassword = Input.Password;
+</script>
