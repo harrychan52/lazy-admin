@@ -1,0 +1,8 @@
+import type { PropType } from 'vue';
+
+export const basicProps = {
+  title: {
+    type: [String, Function] as PropType<string | ((data: Recordable) => string)>,
+    default: null,
+  },
+};

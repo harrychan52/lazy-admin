@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { store } from '/@/store';
 import type { UserInfo } from '/#/store';
+import piniaPersistConfig from '/@/config/piniaPersist';
 
 export interface UserState {
   token: string;
@@ -38,6 +39,7 @@ export const useUserStore = defineStore({
       this.userInfo = userInfo;
     },
   },
+  persist: piniaPersistConfig('UserState'),
 });
 
 // Need to be used outside the setup
